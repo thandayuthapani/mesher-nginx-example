@@ -6,6 +6,10 @@ This example shows you how to use mesher
 ```sh
 git clone https://github.com/thandayuthapani/mesher-nginx-example.git
 ```
+***Run Script***
+```sh
+bash -x config_env.sh
+```
 ***Run the docker compose file***
 ```sh
 docker-compose up
