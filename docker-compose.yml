@@ -1,11 +1,11 @@
 version: '2'
 services:
   Service-Center:
-    image: servicecomb/service-center:1.0.0-m2
+    image: servicecomb/service-center:1.0.0-m2 # uses latest-service center image
     ports:
-      - 30100:30100
+      - 30100:30100 # exposing service-center to machine port
   MesherProvider:
-    image: hwcse/cse-mesher:1.4.8
+    image: hwcse/cse-mesher:1.4.8 # uses latest mesher image
     environment:
       - CSE_REGISTRY_ADDR=http://ServiceCenter:30100 
       - SERVICE_NAME=nginx
@@ -15,7 +15,7 @@ services:
     ports:
       - 3001:30101
   MesherConsumer:
-    image: hwcse/cse-mesher:1.4.8
+    image: hwcse/cse-mesher:1.4.8 # uses latest mesher image
     environment:
       - CSE_REGISTRY_ADDR=http://ServiceCenter:30100 
       - SERVICE_NAME=Client
@@ -23,6 +23,6 @@ services:
       - APP_ID=default
     network_mode: "host"
   Server:
-    image: nginx
+    image: nginx # uses nginx latest image
     network_mode: "service:MesherProvider"
 
