@@ -2,12 +2,13 @@
 This example shows you how to use mesher
 
 ## Note:
-Your machine should have only one machine IP(i.e connected to only one network interface)
+Your machine should have only one machine IP(i.e connected to only one network interface). Because service-center will not know on which IP to run and mesher can't resolve service-center's IP also.
 
 ## Quick Start
 ***Clone the code***
 ```sh
 git clone https://github.com/thandayuthapani/mesher-nginx-example.git
+cd mesher-nginx-example
 ```
 ***Run Script***
 ```sh
