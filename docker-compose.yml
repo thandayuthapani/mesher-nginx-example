@@ -1,0 +1,29 @@
+version: '2'
+services:
+  ServiceCenter:
+    image: servicecomb/service-center:1.0.0-m2
+    ports:
+      - 30100:30100
+  MesherProvider:
+    image: hwcse/cse-mesher:1.4.8rc
+    environment:
+      - CSE_REGISTRY_ADDR=http://192.168.42.137:30100 
+      - SERVICE_NAME=nginx
+      - VERSION=0.0.1
+      - APP_ID=default
+      - SPECIFIC_ADDR=127.0.0.1:80
+    ports:
+      - 3001:30101
+  MesherConsumer:
+    image: cse-mesher:1.4.8rc
+    environment:
+      - CSE_REGISTRY_ADDR=http://192.168.42.137:30100 
+      - SERVICE_NAME=Client
+      - VERSION=0.0.1
+      - APP_ID=default
+      - http_proxy=127.0.0.1:30101
+    network_mode: "host"
+  Server:
+    image: nginx
+    network_mode: "service:MesherProvider"
+
