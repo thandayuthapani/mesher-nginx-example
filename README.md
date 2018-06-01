@@ -1,5 +1,7 @@
 # mesher-nginx-example
 This example shows you how to use mesher
+##Note:
+Your machine should have only one machine IP(i.e connected to only one network interface)
 
 ## Quick Start
 ***Clone the code***
