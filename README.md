@@ -16,7 +16,7 @@ git checkout forward
 docker-compose up
 ```
 ***Check for containers***
-Check whether four containers are up and running when running the following command
+Check whether five containers are up and running when running the following command
 ```sh
 docker ps
 ```
