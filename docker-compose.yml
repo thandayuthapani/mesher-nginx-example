@@ -1,28 +1,39 @@
 version: '2'
 services:
   Service-Center:
-    image: servicecomb/service-center:1.0.0-m2 # uses latest-service center image
+    image: servicecomb/service-center:1.0.0-m2
     ports:
-      - 30100:30100 # exposing service-center to machine port
+      - 30100:30100
   MesherProvider:
-    image: hwcse/cse-mesher:1.4.8 # uses latest mesher image
+    image: hwcse/cse-mesher:1.4.8
     environment:
-      - CSE_REGISTRY_ADDR=http://ServiceCenter:30100 
+      - CSE_REGISTRY_ADDR=http://Service-Center:30100 
       - SERVICE_NAME=nginx
       - VERSION=0.0.1
       - APP_ID=default
-      - SPECIFIC_ADDR=127.0.0.1:80
+      - SPECIFIC_ADDR=127.0.0.1:9090
     ports:
       - 3001:30101
+    links:
+      - Service-Center
   MesherConsumer:
-    image: hwcse/cse-mesher:1.4.8 # uses latest mesher image
+    image: hwcse/cse-mesher:1.4.8
     environment:
-      - CSE_REGISTRY_ADDR=http://ServiceCenter:30100 
+      - CSE_REGISTRY_ADDR=http://Service-Center:30100 
       - SERVICE_NAME=Client
       - VERSION=0.0.1
       - APP_ID=default
-    network_mode: "host"
+      - http_proxy=127.0.0.1:30101
+    ports:
+      - 3002:8080
+    links:
+      - Service-Center
   Server:
-    image: nginx # uses nginx latest image
+    image: nginx
     network_mode: "service:MesherProvider"
+  Consumer:
+    image: thanda/client-forwarder:latest
+    network_mode: "service:MesherConsumer"
+    environment:
+      - http_proxy=127.0.0.1:30101
 
