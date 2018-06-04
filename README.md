@@ -9,10 +9,7 @@ Your machine should have only one machine IP(i.e connected to only one network i
 ```sh
 git clone https://github.com/thandayuthapani/mesher-nginx-example.git
 cd mesher-nginx-example
-```
-***Run Script***
-```sh
-bash -x config_env.sh
+git checkout forward
 ```
 ***Run the docker compose file***
 ```sh
@@ -25,7 +22,7 @@ docker ps
 ```
 ***Set the proxy***
 ```sh
-export http_proxy=0.0.0.0:30101 #mesher-consumer has it's port exposed to machine's port of 30101
+export http_proxy=127.0.0.1:3002 
 ```
 ***curl nginx***
 
