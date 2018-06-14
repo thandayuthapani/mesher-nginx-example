@@ -23,7 +23,6 @@ services:
       - SERVICE_NAME=Client
       - VERSION=0.0.1
       - APP_ID=default
-      - http_proxy=127.0.0.1:30101
     ports:
       - 3002:8080
     links:
@@ -32,7 +31,7 @@ services:
     image: nginx
     network_mode: "service:MesherProvider"
   Consumer:
-    image: thanda/client-forwarder:latest
+    image: thanda/client-forwarder:goRestful
     network_mode: "service:MesherConsumer"
     environment:
       - http_proxy=127.0.0.1:30101
